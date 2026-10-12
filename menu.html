@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MENU TIỆM TRÀ CAPPY Ú Ú 🧋 | Trà Sữa, Sữa Chua & Trà Trái Cây</title>
+  <meta name="description"
+    content="Bảng thực đơn Tiệm Trà Cappy Ú Ú - Trà sữa thơm béo, sữa chua mát lạnh, trà trái cây tươi ngon cùng Capybara siêu chill.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- html2pdf for direct PDF file generation & download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --primary-yellow: #FFB300;
+      --primary-gold: #FFA000;
+      --accent-amber: #FF8F00;
+      --accent-coral: #FF5252;
+      --accent-pink: #E91E63;
+      --accent-green: #2E7D32;
+      --accent-teal: #00897B;
+      --bg-cream: #FFFDF0;
+      --bg-yellow: #FFF9C4;
+      --board-border: #FFB300;
+      --board-border-outer: #FFA000;
+      --board-bg: #FFFDF4;
+      --card-bg: #FFFFFF;
+      --card-alt: #FFFDE7;
+      --text-brown: #3E2723;
+      --text-muted: #795548;
+      --price-color: #D84315;
+      --font-display: 'Fredoka', cursive, sans-serif;
+      --font-body: 'Quicksand', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #FFF9C4;
+      background-image:
+        radial-gradient(#FBC02D 2px, transparent 2px),
+        radial-gradient(#FFE082 2px, #FFF8E1 2px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+      color: var(--text-brown);
+      min-height: 100vh;
+      padding: 24px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* TOP ACTION BAR */
+    .menu-action-bar {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      color: var(--text-brown);
+      padding: 9px 20px;
+      border-radius: 9999px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 2px solid #FFCA28;
+      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.08);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      background: #FFF8E1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(139, 69, 19, 0.14);
+      border-color: #FFA000;
+    }
+
+    .btn-action.download-pdf {
+      background: linear-gradient(135deg, #FF8F00, #E65100);
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 4px 14px rgba(230, 81, 0, 0.35);
+    }
+
+    .btn-action.download-pdf:hover {
+      background: linear-gradient(135deg, #FFA000, #D84315);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(230, 81, 0, 0.45);
+    }
+
+    .firebase-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E8F5E9;
+      color: #2E7D32;
+      padding: 7px 16px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      border: 1.5px solid #A5D6A7;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #4CAF50;
+      display: inline-block;
+      box-shadow: 0 0 6px #4CAF50;
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* MAIN MENU BOARD (WARM RICH GOLDEN-HONEY YELLOW AESTHETIC) */
+    .menu-board-container {
+      width: 100%;
+      max-width: 860px;
+      background: linear-gradient(180deg, #FFFBE6 0%, #FFF8D6 100%);
+      border: 6px solid #FFB300;
+      outline: 3px solid #FFE082;
+      outline-offset: -9px;
+      border-radius: 34px;
+      padding: 34px 28px 26px;
+      box-shadow: 0 20px 48px rgba(139, 69, 19, 0.18), inset 0 0 30px rgba(255, 213, 79, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Corner Cute Decorations */
+    .corner-dec {
+      position: absolute;
+      font-size: 1.6rem;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+    .corner-tl { top: 14px; left: 16px; }
+    .corner-tr { top: 14px; right: 16px; }
+    .corner-bl { bottom: 14px; left: 16px; }
+    .corner-br { bottom: 14px; right: 16px; }
+
+    /* HEADER BANNER */
+    .menu-header-banner {
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .sub-brand-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, #FFD54F, #FFCA28);
+      color: #4E342E;
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 5px 22px;
+      border-radius: 9999px;
+      border: 2px solid #FFA000;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 8px rgba(255, 160, 0, 0.25);
+      letter-spacing: 0.5px;
+    }
+
+    .main-menu-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .title-menu-text {
+      font-family: var(--font-display);
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: var(--accent-coral);
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0px #FFE082, 4px 4px 0px rgba(230, 81, 0, 0.2);
+      line-height: 1;
+    }
+
+    .title-face-bubble {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 3.5px solid #26A69A;
+      border-radius: 22px;
+      padding: 4px 18px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2rem;
+      color: #00796B;
+      background: #E0F2F1;
+      line-height: 1.1;
+      box-shadow: 0 3px 8px rgba(38, 166, 154, 0.25);
+    }
+
+    .menu-slogan {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #795548;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    /* SECTION BOX (GORGEOUS WARM BUTTER-YELLOW PALETTE) */
+    .menu-section-card {
+      background: linear-gradient(180deg, #FFFDF0 0%, #FFF9D2 100%);
+      border: 3px solid #FFCA28;
+      border-radius: 26px;
+      padding: 20px 22px 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(255, 179, 0, 0.16);
+      position: relative;
+    }
+
+    /* Section Header Title */
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2.5px dashed #FFE082;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .theme-milktea .section-title { color: #E65100; }
+    .theme-yogurt .section-title { color: var(--accent-pink); }
+    .theme-fruittea .section-title { color: var(--accent-green); }
+    .theme-matcha .section-title { color: #558B2F; }
+
+    /* SECTION 2-COLUMN LAYOUT WITH CAPY MASCOT */
+    .section-grid-layout {
+      display: grid;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Mascot on Right (Milk tea & Matcha) */
+    .layout-mascot-right {
+      grid-template-columns: 1fr 180px;
+    }
+
+    /* Mascot on Left (Yogurt) */
+    .layout-mascot-left {
+      grid-template-columns: 180px 1fr;
+    }
+
+    /* Full Width (Fruit tea) */
+    .layout-full {
+      grid-template-columns: 1fr;
+    }
+
+    /* CAPY MASCOT CARD (WARM GOLDEN YELLOW MASCOT FRAME) */
+    .mascot-frame-box {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFFDE7 100%);
+      border: 3.5px solid #FFB300;
+      border-radius: 24px;
+      padding: 16px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(255, 179, 0, 0.25);
+      text-align: center;
+    }
+
+    .mascot-frame-box svg {
+      width: 120px;
+      height: 120px;
+      filter: drop-shadow(0 6px 12px rgba(139, 69, 19, 0.18));
+      margin-bottom: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .mascot-frame-box:hover svg {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    .mascot-caption-pill {
+      background: linear-gradient(135deg, #FFD54F, #FFCA28);
+      color: #4E342E;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      border: 1.5px solid #FFA000;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(255, 160, 0, 0.2);
+    }
+
+    /* TABLE / LIST OF ITEMS */
+    .table-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px 8px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #8D6E63;
+    }
+
+    .table-size-pills {
+      display: flex;
+      gap: 12px;
+      margin-right: 8px;
+    }
+
+    .size-pill-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      min-width: 54px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .theme-milktea .size-pill-badge {
+      background: #FFE0B2;
+      color: #E65100;
+      border: 1px solid #FFCC80;
+    }
+
+    .theme-yogurt .size-pill-badge {
+      background: #FCE4EC;
+      color: #C2185B;
+      border: 1px solid #F8BBD0;
+    }
+
+    .theme-fruittea .size-pill-badge {
+      background: #E0F2F1;
+      color: #00796B;
+      border: 1px solid #B2DFDB;
+    }
+
+    .theme-matcha .size-pill-badge {
+      background: #F1F8E9;
+      color: #33691E;
+      border: 1px solid #DCEDC8;
+    }
+
+    .item-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* SINGLE DRINK ROW (CRISP CLEAN BUTTER-CREAM ROWS) */
+    .menu-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 224, 130, 0.6);
+      transition: all 0.2s ease;
+    }
+
+    .menu-item-row:nth-child(even) {
+      background: #FFF59D;
+      background: linear-gradient(90deg, #FFFDE7 0%, #FFF9C4 100%);
+      border: 1px solid #FFE082;
+    }
+
+    .menu-item-row:hover {
+      background: #FFE082;
+      transform: translateX(4px);
+      box-shadow: 0 4px 10px rgba(255, 179, 0, 0.18);
+    }
+
+    .item-left-col {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .item-name {
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--text-brown);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* BADGE TAGS: Bán Chạy, Hot, Mới, Thơm Mát */
+    .item-tag-pill {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-hot, .tag-banchay {
+      background: #FF5252;
+      color: #FFFFFF;
+    }
+
+    .tag-new {
+      background: #FF9800;
+      color: #FFFFFF;
+    }
+
+    .tag-fresh {
+      background: #009688;
+      color: #FFFFFF;
+    }
+
+    .tag-special {
+      background: #AB47BC;
+      color: #FFFFFF;
+    }
+
+    /* PRICES COLUMN */
+    .item-prices-col {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .price-val {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.18rem;
+      color: var(--price-color);
+      min-width: 54px;
+      text-align: center;
+    }
+
+    .price-empty {
+      color: #BCAAA4;
+      font-weight: 700;
+    }
+
+    /* FOOTER BANNER IN IMAGE */
+    .menu-footer-banner {
+      background: linear-gradient(135deg, #FFE082 0%, #FFD54F 100%);
+      border: 2.5px solid #FFB300;
+      border-radius: 20px;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #4E342E;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(255, 179, 0, 0.25);
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: #5D4037;
+    }
+
+    /* LOADING & SKELETON */
+    .loading-state-box {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .loading-spinner {
+      width: 46px;
+      height: 46px;
+      border: 4px solid #FFE082;
+      border-top-color: #FF9800;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* PRINT STYLES FOR HIGH QUALITY OUTPUT */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        padding: 0 !important;
+      }
+
+      .menu-action-bar {
+        display: none !important;
+      }
+
+      .menu-board-container {
+        border-color: #FFB300 !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        padding: 20px 20px 16px !important;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .menu-board-container {
+        padding: 24px 14px 18px;
+        border-radius: 24px;
+      }
+
+      .layout-mascot-right,
+      .layout-mascot-left {
+        grid-template-columns: 1fr;
+      }
+
+      .mascot-frame-box {
+        display: none;
+      }
+
+      .title-menu-text {
+        font-size: 2.5rem;
+      }
+
+      .title-face-bubble {
+        font-size: 1.6rem;
+      }
+
+      .item-name {
+        font-size: 0.95rem;
+      }
+
+      .price-val {
+        font-size: 1.05rem;
+        min-width: 44px;
+      }
+
+      .size-pill-badge {
+        min-width: 44px;
+      }
+
+      .menu-footer-banner {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP ACTION BAR -->
+  <div class="menu-action-bar">
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <a href="index.html" class="btn-action">
+        <span>🏠</span> Về Trang Chủ
+      </a>
+      <div class="firebase-status-badge" id="firebaseStatusBadge">
+        <span class="status-dot"></span>
+        <span id="firebaseStatusText">Firebase RTDB</span>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <button class="btn-action" onclick="fetchMenuData(true)">
+        <span>🔄</span> Tải Lại Dữ Liệu
+      </button>
+      <button class="btn-action download-pdf" id="btnDownloadPdf" onclick="downloadMenuPdf()">
+        <span>📥</span> Tải File PDF Về Máy
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN MENU BOARD CONTAINER -->
+  <div class="menu-board-container" id="menuBoard">
+
+    <!-- Cute Corner Fruits & Stars -->
+    <span class="corner-dec corner-tl">🍓</span>
+    <span class="corner-dec corner-tr">🍋</span>
+    <span class="corner-dec corner-bl">🍓</span>
+    <span class="corner-dec corner-br">⭐</span>
+
+    <!-- HEADER -->
+    <header class="menu-header-banner">
+      <div class="sub-brand-tag">🐾 TIỆM TRÀ CAPPY Ú Ú 🐾</div>
+      <div class="main-menu-title">
+        <span class="title-menu-text">MENU</span>
+        <span class="title-face-bubble">( ^ _ ^ )</span>
+      </div>
+      <p class="menu-slogan">
+        <span>✨</span> Trà Sữa Thơm Béo • Sữa Chua Mát Lạnh • Trái Cây Tươi Ngon <span>✨</span>
+      </p>
+    </header>
+
+    <!-- CONTENT SECTIONS INJECTED HERE -->
+    <div id="menuSectionsContainer">
+      <div class="loading-state-box" id="loadingBox">
+        <div class="loading-spinner"></div>
+        <p style="font-weight: 800; color: #E65100;">Đang kết nối & tải dữ liệu món từ Firebase...</p>
+      </div>
+    </div>
+
+    <!-- FOOTER BANNER -->
+    <footer class="menu-footer-banner">
+      <div class="footer-left">
+        <span>💛</span>
+        <span>Chúc Quý Khách Ngon Miệng & Luôn Tràn Đầy Niềm Vui!</span>
+      </div>
+      <div class="footer-right">
+        <span>🐾</span>
+        <span>Cappy đồng hành cùng bạn mỗi ngày</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // --- FIREBASE REALTIME DATABASE URL ---
+    const FIREBASE_DB_URL = "https://tra-sua-cappy-default-rtdb.firebaseio.com/menu.json";
+
+    // Direct High-Resolution Chibi Capybara SVGs (100% Valid XML - Never Broken!)
+    const MASCOT_BOBA_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+      <defs>
+        <radialGradient id="capyGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFF9C4" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#FFE082" stop-opacity="0.2"/>
+        </radialGradient>
+      </defs>
+      <circle cx="80" cy="80" r="75" fill="url(#capyGlow)"/>
+      <ellipse cx="42" cy="55" rx="8" ry="12" fill="#8B4A15" transform="rotate(-25 42 55)"/>
+      <ellipse cx="118" cy="55" rx="8" ry="12" fill="#8B4A15" transform="rotate(25 118 55)"/>
+      <ellipse cx="80" cy="80" rx="44" ry="38" fill="#C57E37"/>
+      <ellipse cx="80" cy="94" rx="26" ry="18" fill="#99581E"/>
+      <ellipse cx="73" cy="92" rx="3" ry="4.5" fill="#2E1C0C"/>
+      <ellipse cx="87" cy="92" rx="3" ry="4.5" fill="#2E1C0C"/>
+      <path d="M80 93 L80 100 M75 99 Q80 102 85 99" stroke="#2E1C0C" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="60" cy="72" r="6.5" fill="#2E1C0C"/>
+      <circle cx="62" cy="70" r="2.5" fill="#FFFFFF"/>
+      <circle cx="100" cy="72" r="6.5" fill="#2E1C0C"/>
+      <circle cx="102" cy="70" r="2.5" fill="#FFFFFF"/>
+      <ellipse cx="50" cy="86" rx="8" ry="5.5" fill="#FF8A80" opacity="0.75"/>
+      <ellipse cx="110" cy="86" rx="8" ry="5.5" fill="#FF8A80" opacity="0.75"/>
+      <path d="M62 98 L98 98 L92 142 L68 142 Z" fill="#FFF8E1" stroke="#FF9800" stroke-width="2.5"/>
+      <ellipse cx="80" cy="98" rx="18" ry="5" fill="#FFE082"/>
+      <rect x="77" y="68" width="6" height="42" rx="3" fill="#FF7043"/>
+      <circle cx="74" cy="132" r="4.5" fill="#2E1C0C"/>
+      <circle cx="86" cy="134" r="4.5" fill="#2E1C0C"/>
+      <circle cx="80" cy="122" r="4" fill="#2E1C0C"/>
+      <ellipse cx="60" cy="112" rx="7" ry="5" fill="#8B4A15"/>
+      <ellipse cx="100" cy="112" rx="7" ry="5" fill="#8B4A15"/>
+    </svg>`;
+
+    const MASCOT_YOGURT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+      <defs>
+        <radialGradient id="yogurtGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFF0F5" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#FFE082" stop-opacity="0.2"/>
+        </radialGradient>
+      </defs>
+      <circle cx="80" cy="80" r="75" fill="url(#yogurtGlow)"/>
+      <circle cx="80" cy="40" r="14" fill="#FFA726"/>
+      <circle cx="80" cy="40" r="11" fill="#FF9800"/>
+      <ellipse cx="80" cy="28" rx="7" ry="3.5" fill="#4CAF50" transform="rotate(-15 80 28)"/>
+      <ellipse cx="42" cy="58" rx="8" ry="12" fill="#8B4A15" transform="rotate(-25 42 58)"/>
+      <ellipse cx="118" cy="58" rx="8" ry="12" fill="#8B4A15" transform="rotate(25 118 58)"/>
+      <ellipse cx="80" cy="84" rx="44" ry="38" fill="#C57E37"/>
+      <ellipse cx="80" cy="98" rx="26" ry="18" fill="#99581E"/>
+      <ellipse cx="73" cy="96" rx="3" ry="4.5" fill="#2E1C0C"/>
+      <ellipse cx="87" cy="96" rx="3" ry="4.5" fill="#2E1C0C"/>
+      <path d="M80 97 L80 104 M75 103 Q80 106 85 103" stroke="#2E1C0C" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M58 75 Q65 69 72 75" stroke="#2E1C0C" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <path d="M102 75 Q95 69 88 75" stroke="#2E1C0C" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <ellipse cx="50" cy="90" rx="8" ry="5.5" fill="#FF8A80" opacity="0.8"/>
+      <ellipse cx="110" cy="90" rx="8" ry="5.5" fill="#FF8A80" opacity="0.8"/>
+      <path d="M58 116 C58 102 102 102 102 116 C102 142 58 142 58 116 Z" fill="#FFFFFF" stroke="#FFCA28" stroke-width="2.5"/>
+      <circle cx="72" cy="116" r="5" fill="#FF5252"/>
+      <circle cx="88" cy="118" r="5.5" fill="#FFA000"/>
+      <ellipse cx="98" cy="108" rx="5" ry="8" fill="#CFD8DC" transform="rotate(35 98 108)"/>
+      <path d="M98 112 L112 128" stroke="#90A4AE" stroke-width="3" stroke-linecap="round"/>
+    </svg>`;
+
+    const MASCOT_FRUIT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+      <defs>
+        <radialGradient id="fruitGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#E8F5E9" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#FFE082" stop-opacity="0.2"/>
+        </radialGradient>
+      </defs>
+      <circle cx="80" cy="80" r="75" fill="url(#fruitGlow)"/>
+      <ellipse cx="42" cy="58" rx="8" ry="12" fill="#8B4A15" transform="rotate(-25 42 58)"/>
+      <ellipse cx="118" cy="58" rx="8" ry="12" fill="#8B4A15" transform="rotate(25 118 58)"/>
+      <ellipse cx="80" cy="84" rx="44" ry="38" fill="#C57E37"/>
+      <path d="M55 54 C42 44 44 22 62 22 C68 12 92 12 98 22 C116 22 118 44 105 54 Z" fill="#FFFFFF" stroke="#FFB300" stroke-width="2.5"/>
+      <rect x="54" y="48" width="52" height="14" rx="4" fill="#FFE082" stroke="#FFA000" stroke-width="1.8"/>
+      <ellipse cx="80" cy="98" rx="26" ry="18" fill="#99581E"/>
+      <ellipse cx="73" cy="96" rx="3" ry="4.5" fill="#2E1C0C"/>
+      <ellipse cx="87" cy="96" rx="3" ry="4.5" fill="#2E1C0C"/>
+      <path d="M80 97 L80 104 M75 103 Q80 106 85 103" stroke="#2E1C0C" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="60" cy="76" r="6.5" fill="#2E1C0C"/>
+      <circle cx="62" cy="74" r="2.5" fill="#FFFFFF"/>
+      <circle cx="100" cy="76" r="6.5" fill="#2E1C0C"/>
+      <circle cx="102" cy="74" r="2.5" fill="#FFFFFF"/>
+      <ellipse cx="50" cy="90" rx="8" ry="5.5" fill="#FF8A80" opacity="0.8"/>
+      <ellipse cx="110" cy="90" rx="8" ry="5.5" fill="#FF8A80" opacity="0.8"/>
+    </svg>`;
+
+    // Emoji lookup helper based on drink name
+    function getDrinkEmoji(name) {
+      const n = name.toLowerCase();
+      if (n.includes('truyền thống')) return '🧋';
+      if (n.includes('đường đen')) return '🌟';
+      if (n.includes('sữa tươi')) return '🥛';
+      if (n.includes('socola')) return '🍫';
+      if (n.includes('khoai môn')) return '🍠';
+      if (n.includes('thái xanh')) return '🍵';
+      if (n.includes('milo')) return '🥤';
+      if (n.includes('việt quất')) return '🍇';
+      if (n.includes('dâu')) return '🍓';
+      if (n.includes('xoài')) return '🥭';
+      if (n.includes('chanh dây')) return '🍈';
+      if (n.includes('đào')) return '🍑';
+      if (n.includes('sâm dứa')) return '🍃';
+      if (n.includes('thơm') || n.includes('dứa')) return '🍍';
+      if (n.includes('mãng cầu')) return '🍈';
+      if (n.includes('vải')) return '🌸';
+      if (n.includes('atiso')) return '🌺';
+      if (n.includes('nhiệt đới')) return '🍊';
+      if (n.includes('cacao')) return '🍫';
+      if (n.includes('bạc hà')) return '🍃';
+      if (n.includes('matcha')) return '🍵';
+      return '🧋';
+    }
+
+    // Tag badge formatter
+    function getTagBadgeHtml(tag) {
+      if (!tag) return '';
+      const t = tag.toLowerCase();
+      let cssClass = 'tag-new';
+      let cleanText = tag;
+
+      if (t.includes('bán chạy') || t.includes('best seller')) {
+        cssClass = 'tag-banchay';
+        cleanText = 'Bán Chạy';
+      } else if (t.includes('hot')) {
+        cssClass = 'tag-hot';
+        cleanText = 'Hot';
+      } else if (t.includes('mới')) {
+        cssClass = 'tag-new';
+        cleanText = 'Mới';
+      } else if (t.includes('thơm mát') || t.includes('tươi')) {
+        cssClass = 'tag-fresh';
+        cleanText = 'Thơm Mát';
+      } else {
+        cleanText = tag.replace(/[^\p{L}\p{N}\s]/gu, '').trim() || tag;
+      }
+
+      return `<span class="item-tag-pill ${cssClass}">${cleanText}</span>`;
+    }
+
+    // Price formatter helper: 20000 -> 20k
+    function formatPriceK(val) {
+      if (!val) return '<span class="price-empty">—</span>';
+      if (typeof val === 'number') {
+        return (val / 1000) + 'k';
+      }
+      return val;
+    }
+
+    // --- MAIN FETCH & RENDER ---
+    async function fetchMenuData(showToastNotice = false) {
+      const statusText = document.getElementById('firebaseStatusText');
+      if (statusText) statusText.innerText = 'Đang đồng bộ...';
+
+      try {
+        const res = await fetch(FIREBASE_DB_URL);
+        if (!res.ok) throw new Error('HTTP Status ' + res.status);
+        const data = await res.json();
+
+        if (data) {
+          const items = Array.isArray(data) ? data : Object.values(data);
+          renderMenuBoard(items);
+          if (statusText) statusText.innerText = 'Firebase RTDB Live';
+        } else {
+          document.getElementById('menuSectionsContainer').innerHTML = `
+            <div class="loading-state-box">
+              <p style="font-weight: 800; color: #E65100;">Chưa có món nào trên Firebase!</p>
+            </div>
+          `;
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
+        if (statusText) statusText.innerText = 'Ngoại Tuyến (Offline)';
+        const badge = document.getElementById('firebaseStatusBadge');
+        if (badge) {
+          badge.style.background = '#FFEBEE';
+          badge.style.borderColor = '#FFCDD2';
+          badge.style.color = '#C62828';
+        }
+      }
+    }
+
+    // Setup Realtime Live Sync
+    function initRealtimeSync() {
+      if (typeof EventSource === 'undefined') return;
+      try {
+        const sse = new EventSource(FIREBASE_DB_URL);
+        sse.addEventListener('put', (e) => {
+          try {
+            const payload = JSON.parse(e.data);
+            if (payload && payload.path === '/' && payload.data) {
+              const freshData = Array.isArray(payload.data) ? payload.data : Object.values(payload.data);
+              renderMenuBoard(freshData);
+            }
+          } catch (err) {
+            console.warn('Realtime sync parse error:', err);
+          }
+        });
+      } catch (err) {
+        console.warn('SSE init error:', err);
+      }
+    }
+
+    // --- RENDER MENU BOARD SECTIONS ---
+    function renderMenuBoard(items) {
+      const container = document.getElementById('menuSectionsContainer');
+
+      // Group A: Trà Sữa & Sữa Tươi
+      const milkTeaItems = items.filter(i => {
+        const n = i.name.toLowerCase();
+        return n.includes('trà sữa') || n.includes('sữa tươi') || n.includes('milo') || n.includes('thái xanh') || n.includes('socola');
+      });
+
+      // Group B: Sữa Chua Trái Cây
+      const yogurtItems = items.filter(i => {
+        const n = i.name.toLowerCase();
+        return n.includes('sữa chua');
+      });
+
+      // Group C: Giải Khát Thanh Nhiệt & Trà Trái Cây
+      const fruitTeaItems = items.filter(i => {
+        const n = i.name.toLowerCase();
+        return i.category === 'tra-trai-cay' || n.includes('sâm dứa') || n.includes('atiso');
+      });
+
+      // Group D: Matcha & Latte Đặc Biệt
+      const matchaItems = items.filter(i => {
+        const n = i.name.toLowerCase();
+        return i.category === 'matcha-latte' && !n.includes('sâm dứa');
+      });
+
+      // Remaining items (if any)
+      const usedIds = new Set([...milkTeaItems, ...yogurtItems, ...fruitTeaItems, ...matchaItems].map(i => i.id));
+      const remainingItems = items.filter(i => !usedIds.has(i.id));
+
+      let html = '';
+
+      // --- SECTION 1: TRÀ SỮA & SỮA TƯƠI ---
+      if (milkTeaItems.length > 0) {
+        html += `
+          <section class="menu-section-card theme-milktea">
+            <div class="section-title-wrap">
+              <h3 class="section-title"><span>🧋</span> TRÀ SỮA & SỮA TƯƠI</h3>
+            </div>
+            <div class="section-grid-layout layout-mascot-right">
+              <div class="table-content-wrap">
+                <div class="table-header-row">
+                  <span>Tên Món</span>
+                  <div class="table-size-pills">
+                    <span class="size-pill-badge">Size M</span>
+                    <span class="size-pill-badge">Size L</span>
+                  </div>
+                </div>
+                <div class="item-list-container">
+                  ${renderItemListHtml(milkTeaItems)}
+                </div>
+              </div>
+
+              <!-- Mascot Right (Inline SVG) -->
+              <div class="mascot-frame-box">
+                ${MASCOT_BOBA_SVG}
+                <div class="mascot-caption-pill">Cappy mê Trà Sữa 🧋</div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      // --- SECTION 2: SỮA CHUA TRÁI CÂY ---
+      if (yogurtItems.length > 0) {
+        html += `
+          <section class="menu-section-card theme-yogurt">
+            <div class="section-title-wrap">
+              <h3 class="section-title"><span>🍓</span> SỮA CHUA TRÁI CÂY</h3>
+            </div>
+            <div class="section-grid-layout layout-mascot-left">
+              <!-- Mascot Left (Inline SVG) -->
+              <div class="mascot-frame-box">
+                ${MASCOT_YOGURT_SVG}
+                <div class="mascot-caption-pill">Cappy ăn Sữa Chua 🍨</div>
+              </div>
+
+              <div class="table-content-wrap">
+                <div class="table-header-row">
+                  <span>Tên Món</span>
+                  <div class="table-size-pills">
+                    <span class="size-pill-badge">Size M</span>
+                    <span class="size-pill-badge">Size L</span>
+                  </div>
+                </div>
+                <div class="item-list-container">
+                  ${renderItemListHtml(yogurtItems)}
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      // --- SECTION 3: GIẢI KHÁT THANH NHIỆT & TRÀ TRÁI CÂY ---
+      if (fruitTeaItems.length > 0) {
+        html += `
+          <section class="menu-section-card theme-fruittea">
+            <div class="section-title-wrap">
+              <h3 class="section-title"><span>🌿</span> GIẢI KHÁT THANH NHIỆT & TRÀ TRÁI CÂY</h3>
+            </div>
+            <div class="section-grid-layout layout-full">
+              <div class="table-content-wrap">
+                <div class="table-header-row">
+                  <span>Tên Món</span>
+                  <div class="table-size-pills">
+                    <span class="size-pill-badge">Size M</span>
+                    <span class="size-pill-badge">Size L</span>
+                  </div>
+                </div>
+                <div class="item-list-container">
+                  ${renderItemListHtml(fruitTeaItems)}
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      // --- SECTION 4: MATCHA & CACAO LATTE ---
+      if (matchaItems.length > 0) {
+        html += `
+          <section class="menu-section-card theme-matcha">
+            <div class="section-title-wrap">
+              <h3 class="section-title"><span>🍵</span> MATCHA & LATTE ĐẶC BIỆT</h3>
+            </div>
+            <div class="section-grid-layout layout-mascot-right">
+              <div class="table-content-wrap">
+                <div class="table-header-row">
+                  <span>Tên Món</span>
+                  <div class="table-size-pills">
+                    <span class="size-pill-badge">Size M</span>
+                    <span class="size-pill-badge">Size L</span>
+                  </div>
+                </div>
+                <div class="item-list-container">
+                  ${renderItemListHtml(matchaItems)}
+                </div>
+              </div>
+
+              <!-- Mascot Right (Inline SVG) -->
+              <div class="mascot-frame-box">
+                ${MASCOT_FRUIT_SVG}
+                <div class="mascot-caption-pill">Cappy mê Latte 🍵</div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      // --- REMAINING ITEMS (If any) ---
+      if (remainingItems.length > 0) {
+        html += `
+          <section class="menu-section-card theme-milktea">
+            <div class="section-title-wrap">
+              <h3 class="section-title"><span>⭐</span> MÓN ĐẶC BIỆT KHÁC</h3>
+            </div>
+            <div class="section-grid-layout layout-full">
+              <div class="table-content-wrap">
+                <div class="table-header-row">
+                  <span>Tên Món</span>
+                  <div class="table-size-pills">
+                    <span class="size-pill-badge">Size M</span>
+                    <span class="size-pill-badge">Size L</span>
+                  </div>
+                </div>
+                <div class="item-list-container">
+                  ${renderItemListHtml(remainingItems)}
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    // Helper: Render item rows
+    function renderItemListHtml(items) {
+      return items.map(item => {
+        const icon = getDrinkEmoji(item.name);
+        const tagHtml = getTagBadgeHtml(item.tag);
+        const priceM = item.prices ? formatPriceK(item.prices.M) : formatPriceK(null);
+        const priceL = item.prices ? formatPriceK(item.prices.L) : formatPriceK(null);
+
+        return `
+          <div class="menu-item-row">
+            <div class="item-left-col">
+              <span class="item-icon">${icon}</span>
+              <span class="item-name">${item.name}</span>
+              ${tagHtml}
+            </div>
+            <div class="item-prices-col">
+              <span class="price-val">${priceM}</span>
+              <span class="price-val">${priceL}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- DOWNLOAD PDF FUNCTION ---
+    function downloadMenuPdf() {
+      const element = document.getElementById('menuBoard');
+      const btn = document.getElementById('btnDownloadPdf');
+      if (btn) {
+        btn.innerHTML = '<span>⏳</span> Đang tạo PDF...';
+        btn.disabled = true;
+      }
+
+      if (typeof html2pdf !== 'undefined') {
+        const opt = {
+          margin: [8, 8, 8, 8],
+          filename: 'Menu_Tiem_Tra_Cappy_U_U.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, logging: false },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+          if (btn) {
+            btn.innerHTML = '<span>📥</span> Tải File PDF Về Máy';
+            btn.disabled = false;
+          }
+        }).catch(err => {
+          console.warn('html2pdf fallback to window.print():', err);
+          window.print();
+          if (btn) {
+            btn.innerHTML = '<span>📥</span> Tải File PDF Về Máy';
+            btn.disabled = false;
+          }
+        });
+      } else {
+        window.print();
+        if (btn) {
+          btn.innerHTML = '<span>📥</span> Tải File PDF Về Máy';
+          btn.disabled = false;
+        }
+      }
+    }
+
+    // --- INITIALIZE ON DOM READY ---
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchMenuData();
+      initRealtimeSync();
+    });
+  </script>
+</body>
+
+</html>
