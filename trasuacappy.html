@@ -43,6 +43,11 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    html {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
     body {
       font-family: var(--font-body);
       background-color: var(--bg-yellow);
@@ -54,6 +59,8 @@
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
       line-height: 1.5;
     }
 
@@ -257,6 +264,31 @@
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    .print-menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #FFB300, #FFA000);
+      color: #3E2723;
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      font-weight: 800;
+      font-size: 0.92rem;
+      text-decoration: none;
+      white-space: nowrap;
+      border: 2px solid #FFD54F;
+      box-shadow: 0 4px 12px rgba(255, 179, 0, 0.3);
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .print-menu-btn:hover {
+      background: linear-gradient(135deg, #FFA000, #FF8F00);
+      color: #FFFFFF;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 16px rgba(230, 81, 0, 0.35);
+      border-color: #FFA000;
     }
 
     .hotline-btn {
@@ -1874,21 +1906,180 @@
     }
 
     @media (max-width: 640px) {
+      /* TOP BAR ON MOBILE */
+      .top-bar {
+        flex-wrap: wrap;
+        font-size: 0.74rem;
+        padding: 6px 8px;
+        gap: 3px 8px;
+        line-height: 1.3;
+      }
+
+      /* CONTAINER PADDING */
+      .container {
+        padding: 0 12px;
+      }
+
+      /* HEADER ON MOBILE */
+      .header-content {
+        padding: 8px 0;
+        gap: 8px;
+      }
+
+      .logo-box {
+        gap: 8px;
+        min-width: 0;
+        flex: 1;
+      }
+
+      .logo-img-wrapper {
+        width: 38px;
+        height: 38px;
+        flex-shrink: 0;
+      }
+
+      .logo-text h1 {
+        font-size: 1.05rem;
+        white-space: nowrap;
+      }
+
+      .logo-text p {
+        display: none; /* Hide long slogan on mobile to prevent squeezing */
+      }
+
+      .header-actions {
+        gap: 5px;
+        flex-shrink: 0;
+      }
+
+      .print-menu-btn {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        white-space: nowrap;
+        gap: 4px;
+      }
+
+      .hotline-btn {
+        padding: 6px 8px;
+        font-size: 0.78rem;
+        gap: 4px;
+      }
+
+      .hotline-btn span {
+        display: inline;
+      }
+
+      .hotline-btn strong {
+        display: none; /* Hide long phone number string, keep clean Hotline icon */
+      }
+
+      .cart-btn {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        gap: 4px;
+      }
+
+      .cart-btn span.cart-text {
+        display: none;
+      }
+
+      .cart-badge {
+        width: 20px;
+        height: 20px;
+        font-size: 0.72rem;
+      }
+
+      /* HERO CARD ON MOBILE */
+      .hero-card {
+        padding: 20px 14px;
+        border-radius: 20px;
+        gap: 16px;
+      }
+
+      .hero-title {
+        font-size: 1.5rem;
+        line-height: 1.25;
+        margin-bottom: 10px;
+      }
+
+      .hero-desc {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+
+      .hero-perks {
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .perk-item {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+
+      .btn-hero-primary,
+      .btn-hero-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 0.92rem;
+      }
+
+      .hero-mascot-img {
+        max-width: 220px;
+      }
+
+      .hero-speech-bubble {
+        font-size: 0.82rem;
+        padding: 8px 12px;
+      }
+
+      /* FLOATING BUDDY ON MOBILE - HIDE GIANT BUBBLE */
+      .floating-capy-buddy {
+        bottom: 16px;
+        right: 16px;
+      }
+
+      .floating-buddy-bubble {
+        display: none !important; /* Hide speech bubble on mobile so it doesn't block screen */
+      }
+
+      .capy-avatar-bubble {
+        width: 52px;
+        height: 52px;
+      }
+
+      /* 2-COLUMN BALANCED PRODUCT GRID ON MOBILE */
       .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+
+      .product-card {
+        border-radius: 16px;
       }
 
       .card-img-box {
-        height: 160px;
+        height: 140px;
       }
 
       .card-content {
-        padding: 12px 10px 14px;
+        padding: 10px 8px 12px;
       }
 
       .card-title {
-        font-size: 1.05rem;
+        font-size: 0.95rem;
+        min-height: 38px;
+        line-height: 1.25;
       }
 
       .card-desc {
@@ -1896,46 +2087,27 @@
       }
 
       .card-price-display {
-        font-size: 1.1rem;
+        font-size: 1rem;
+      }
+
+      .size-pill {
+        padding: 4px 6px;
+        font-size: 0.75rem;
       }
 
       .card-actions {
         flex-direction: column;
+        gap: 6px;
       }
 
       .btn-customize {
         padding: 6px;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
       }
 
       .btn-add-cart {
-        padding: 8px;
-        font-size: 0.85rem;
-      }
-
-      .hero-title {
-        font-size: 1.65rem;
-      }
-
-      .logo-text h1 {
-        font-size: 1.25rem;
-      }
-
-      .logo-img-wrapper {
-        width: 44px;
-        height: 44px;
-      }
-
-      .hotline-btn span {
-        display: none;
-      }
-
-      .hotline-btn {
-        padding: 8px;
-      }
-
-      .cart-btn span.cart-text {
-        display: none;
+        padding: 7px;
+        font-size: 0.82rem;
       }
     }
 
@@ -2224,6 +2396,9 @@
       </div>
 
       <div class="header-actions">
+        <a href="menu.html" class="print-menu-btn" title="Xem và in bảng thực đơn poster Cappy">
+          <span>🖨️</span> <span>IN Menu</span>
+        </a>
         <a href="tel:0901234567" class="hotline-btn" title="Gọi đặt món ngay">
           <span>📞 Hotline:</span> <strong>0901.234.567</strong>
         </a>
@@ -2752,7 +2927,7 @@
               if (statusText) statusText.innerText = 'Firebase RTDB Live';
             }
             if (showToastOnSuccess) {
-              showToast('Đã đồng bộ ' + loadedArray.length + ' món từ Firebase thành công! ✨');
+              //showToast('Đã đồng bộ ' + loadedArray.length + ' món từ Firebase thành công! ✨');
             }
             return;
           }
