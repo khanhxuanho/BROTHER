@@ -2357,7 +2357,22 @@
       color: #795548;
       font-weight: 600;
     }
-  </style>
+  
+    /* HIDE HERO & RANDOM SUGGESTER ON MOBILE AS REQUESTED */
+    @media (max-width: 768px) {
+      .hero-section {
+        display: none !important;
+      }
+
+      .random-suggester-box {
+        display: none !important;
+      }
+
+      .category-tabs-section {
+        margin-top: 12px !important;
+      }
+    }
+</style>
 </head>
 
 <body>
