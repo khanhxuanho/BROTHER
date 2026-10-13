@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -32,8 +32,8 @@
       --radius-md: 18px;
       --radius-lg: 26px;
       --radius-full: 9999px;
-      --font-display: 'Fredoka', cursive, sans-serif;
-      --font-body: 'Quicksand', sans-serif;
+      --font-display: 'Baloo 2', 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     * {
@@ -50,6 +50,9 @@
 
     body {
       font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
       background-color: var(--bg-yellow);
       background-image:
         radial-gradient(#FBC02D 1.5px, transparent 1.5px),
@@ -2938,6 +2941,7 @@
         if (!a || !b) return true;
         if (a.id !== b.id || a.name !== b.name || a.category !== b.category) return true;
         if (a.prices?.M !== b.prices?.M || a.prices?.L !== b.prices?.L) return true;
+        if (a.desc !== b.desc || a.tag !== b.tag || a.imageBase64 !== b.imageBase64) return true;
       }
       return false;
     }
@@ -2950,11 +2954,9 @@
       renderProducts();
       updateCartUI();
 
-      // 2. Connect to Firebase smoothly in the background without blocking the UI thread
-      setTimeout(() => {
-        loadMenuFromFirebase(false);
-        initFirebaseRealtimeSync();
-      }, 400);
+      // 2. Connect to Firebase immediately to fetch dynamic live menu
+      loadMenuFromFirebase(false);
+      initFirebaseRealtimeSync();
     }
 
     if (document.readyState === 'loading') {
@@ -2980,7 +2982,7 @@
         if (data) {
           const loadedArray = Array.isArray(data) ? data : Object.values(data);
           if (loadedArray.length > 0) {
-            // Only re-render if data actually changed from Firebase
+            // Re-render when data actually changed from Firebase
             const hasChanged = isMenuDataChanged(loadedArray);
             if (hasChanged) {
               MENU_DATA = loadedArray;
@@ -3050,26 +3052,38 @@
         sseInstance.addEventListener('put', (e) => {
           try {
             const payload = JSON.parse(e.data);
-            if (payload && payload.path === '/' && payload.data) {
-              const freshData = Array.isArray(payload.data) ? payload.data : Object.values(payload.data);
-              if (freshData.length > 0) {
-                // Only re-render if data is actually different
-                const hasChanged = isMenuDataChanged(freshData);
-                if (hasChanged) {
-                  MENU_DATA = freshData;
-                  initCardSizes();
-                  updateCategoryBadges();
-                  renderProducts();
-                  showToast('Thực đơn vừa được cập nhật thời gian thực từ Firebase! ⚡');
+            if (payload) {
+              if (payload.path === '/' && payload.data) {
+                const freshData = Array.isArray(payload.data) ? payload.data : Object.values(payload.data);
+                if (freshData.length > 0) {
+                  const hasChanged = isMenuDataChanged(freshData);
+                  if (hasChanged) {
+                    MENU_DATA = freshData;
+                    initCardSizes();
+                    updateCategoryBadges();
+                    renderProducts();
+                    showToast('Thực đơn vừa được cập nhật thời gian thực từ Firebase! ⚡');
+                  }
+                  const statusPill = document.getElementById('firebaseStatusPill');
+                  const statusText = document.getElementById('firebaseStatusText');
+                  if (statusPill) statusPill.className = 'firebase-status-pill';
+                  if (statusText) statusText.innerText = 'Firebase RTDB Live';
                 }
-                const statusPill = document.getElementById('firebaseStatusPill');
-                const statusText = document.getElementById('firebaseStatusText');
-                if (statusPill) statusPill.className = 'firebase-status-pill';
-                if (statusText) statusText.innerText = 'Firebase RTDB Live';
+              } else if (payload.path !== '/') {
+                // Subpath update
+                loadMenuFromFirebase(false);
               }
             }
           } catch (err) {
             console.warn('SSE parse error:', err);
+          }
+        });
+
+        sseInstance.addEventListener('patch', () => {
+          try {
+            loadMenuFromFirebase(false);
+          } catch (err) {
+            console.warn('SSE patch error:', err);
           }
         });
 
